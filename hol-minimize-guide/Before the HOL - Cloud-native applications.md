@@ -236,6 +236,7 @@ In this task, you will take the starter files and run the node.js application as
 6. To initialize the local database with test content, first navigate to the content-init directory and run npm install.
 
    Location of the starter files
+   
    ![Cloned folder.](media/add-image04.png "relative path")
    
       ```bash
