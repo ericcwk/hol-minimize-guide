@@ -9,17 +9,13 @@
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
     - [Task 1: Setup Azure Cloud Shell](#task-1-setup-azure-cloud-shell)
-    - [Task 2: Download Starter Files](#task-2-download-starter-files)
-    - [Task 3: Connect securely to the build agent](#task-3-connect-securely-to-the-build-agent)
-    - [Task 8: Complete the build agent setup](#task-8-complete-the-build-agent-setup)
-    - [Task 9: Clone Repositories to the Build Agent](#task-9-clone-repositories-to-the-build-agent)
-    - [Task 10: Test the Starter Application](#task-10-test-the-starter-application)
-    - [Task 11: Build the Docker Images](#task-11-build-the-docker-images)
-    - [Task 12: Run Docker Containers](#task-12-run-docker-containers)
-    - [Task 13: Setup Environment Variables](#task-13-setup-environment-variables)
-    - [Task 14: Push Images to Azure Container Registry](#task-14-push-images-to-azure-container-registry)
-    - [Task 15: Setup CI Pipeline to Push Images](#task-15-setup-ci-pipeline-to-push-images)
-
+    - [Task 2: Connect securely to the build agent](#task-2-connect-securely-to-the-build-agent)
+    - [Task 3: Complete the build agent checking](#task-3-complete-the-build-agent-checking)
+    - [Task 4: Download Starter Files](#task-4-download-starter-files)
+    - [Task 5: Run MongoDB container in Azure Linux VM (mongoDB)](#task-5-run-mongodb-container-in-azure-linux-vm)
+    - [Task 6: Build the Docker Images](#task-6-build-the-docker-images)
+    - [Task 7: Push Images to Azure Container Registry](#task-7-push-images-to-azure-container-registry)
+ 
 
 <!-- /TOC -->
 
@@ -161,7 +157,7 @@ In this task, you update the packages and install the Docker engine.
 
     ![In this screenshot of a Cloud Shell window, docker container ls has been typed and run at the command prompt, as has the docker container ls -a command.](media/b4-image31.png "Display Docker container list")
 
-### Task 3: Download Starter Files
+### Task 4: Download Starter Files
 
 In this task, you use `git` to copy the lab content to your cloud shell so that the lab starter files will be available.
 
@@ -195,7 +191,7 @@ In this task, you use `git` to copy the lab content to your cloud shell so that 
    
       ![Cloned folder.](media/add-image04.png "relative path")
 
-### Task 4: Run run mongoDB as container in Linux
+### Task 5: Run MongoDB container in Azure Linux VM (mongoDB)
 
 In this task, you will take the starter files and run the node.js application as a Docker application.  You will build the Docker images from the existing files and run containers to test and execute the application.
 
@@ -280,7 +276,7 @@ In this task, you will take the starter files and run the node.js application as
 
    ![This screenshot of the console window shows the data output.](media/b410-Step8.1.png "Show database records")
 
-### Task 5: Build the Docker Images
+### Task 6: Build the Docker Images
 
 In this task, you will build the Docker images for the application --- one for the API application and another for the web application. Each image will be created via Docker commands that rely on a Dockerfile.
 
@@ -342,7 +338,7 @@ In this task, you will build the Docker images for the application --- one for t
    ![Three images are now visible in this screenshot of the console window: content-init, content-web, content-api, and node.](media/vm-list-containers.PNG "View content images")
 
 
-### Task 14: Push Images to Azure Container Registry
+### Task 7: Push Images to Azure Container Registry
 
 To run containers in a remote environment, you will typically push images to a Docker registry, where you can store and distribute images. Each service will have a repository that can be pushed to and pulled from with Docker commands. Azure Container Registry (ACR) is a managed private Docker registry service based on Docker Registry v2.
 
@@ -431,4 +427,3 @@ In this task, you will push images to your ACR account, version images with tagg
 
 
 You should follow all steps provided _before_ performing the Hands-on lab.
-
