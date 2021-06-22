@@ -10,7 +10,7 @@
   - [Before the hands-on lab](#before-the-hands-on-lab)
     - [Task 1: Setup Azure Cloud Shell](#task-1-setup-azure-cloud-shell)
     - [Task 2: Connect securely to the build agent](#task-2-connect-securely-to-the-build-agent)
-    - [Task 3: Complete the build agent checking](#task-3-complete-the-build-agent-checking)
+    - [Task 3: Complete build agent VM checking](#task-3-complete-build-agent-vm-checking)
     - [Task 4: Download Starter Files](#task-4-download-starter-files)
     - [Task 5: Run MongoDB container in Azure Linux VM (mongoDB)](#task-5-run-mongodb-container-in-azure-linux-vm)
     - [Task 6: Build the Docker Images](#task-6-build-the-docker-images)
@@ -46,7 +46,7 @@ Before the hands-on lab, you will need to prepare the environment by deploying t
 
 ## Before the hands-on lab
 
-**Duration**: 60 minutes
+**Duration**: around 60 minutes
 
 You should follow all of the steps provided in this section _before_ taking part in the hands-on lab ahead of time as some of these steps take time.
 
@@ -56,16 +56,26 @@ You should follow all of the steps provided in this section _before_ taking part
 
    ![The cloud shell icon is highlighted on the menu bar.](media/b4-image35.png "Cloud Shell")
    
-   As this is the first time to access the cloudshell, it will require to create storage account for cloudshell to use. Click **Show advanced settings**.
+   As this is the first time to access the cloudshell, you will need to create a Azure storage account.
    
-   ![Create cloud shell storage account](media/add-image01.png)
-   
-   Click **Create new** under the section of **Storage account** with unqiue storage acocunt name = **storage** + **"deploymentid"**
+   CLick "**Show advanced settings**".
 
-   Create new: **storage** + **"deploymentid"**
-   Create new Fiule share: blob
-   **depolymentid** can be found in the envirorment lab's specification
+   ![Create cloud shell storage account](media/add-image01.png)       
+   
+   Remain the default parameter in
+      - **Subscription**
+      - **Cloud Shell region**
+      - **Resource group**
+   
+   Create storage account by entering:
+   - for **Storage account**, refer to the **Environment Details**, find and copy the value from **deploymentid**
+   - Suggest to simply combinate "storage" and  **deploymentid** as the storage account name
+   - enter value "**blob**" in the **File share**
+
+   Refer to below screencap as example 
+
    ![Create cloud shell storage account](media/add-image02.png)
+
 
 
 2. The cloud shell opens in the browser window. Choose **Bash** if prompted or use the left-hand dropdown on the shell menu bar to choose **Bash** from the dropdown (as shown). If prompted, select **Confirm**.
@@ -80,58 +90,33 @@ You should follow all of the steps provided in this section _before_ taking part
 
    ![In this screenshot of a Bash window, az account show has been typed and run at the command prompt. Some subscription information is visible in the window, and some information is obscured.](media/b4-image37.png "Bash Shell AZ Account Show")
 
-4. To set your default subscription to something other than the current selection, type the following, replacing {id} with the desired subscription id value:
-
-   ```bash
-   az account set --subscription {id}
-   ```
-
-> **Note**: To list all of your subscriptions, type:
-
-   ```bash
-   az account list
-   ```
-
-   ![In this screenshot of a Bash window, az account list has been typed and run at the command prompt. Some subscription information is visible in the window, and some information is obscured.](media/b4-image38.png "Bash AZ Account List")
 
 ### Task 2: Connect securely to the build agent
 
-In this section, you validate that you can connect to the new build agent
-VM.
+In this section, you validate that you can connect to the new **"Build Agent VM"** (Linux server) vis SSH in the cloudshell.
 
-1. Open a **new** Azure Cloud Shell console and run the following command to find the IP address for the build agent VM provisioned when you ran the ARM deployment:
+1. Open Azure Cloud Shell console and run the SSH command to connect the Linux server:
 
    > **Note**: If you don't have a cloud shell available, refer back to [Task 1: Setup Azure Cloud Shell](#task-1-setup-azure-cloud-shell).
 
-   Find public ip and password of the Linux server in the cloudlab's environment specification
-   ![find the public ip and password](media/add-test.png)
+   Refer to the **"Environment Details"**, copy the value from **"Command to Connect to Build Agent VM"**
+   - Copy and paste the command in cloud shell
+  
+   ![find the public ip and password](media/add-image05.png)
    ```
+2. When asked to confirm if you want to connect, as the authenticity of the connection cannot be validated, type `yes`.
 
-2. Connect to the Linux VM by using ssh command:
+3. When asked for the password, - copy the **"Build Agent VM Password"** and paste in the cloudshell for password login
 
-   ```bash
-    ssh -i [BUILDAGENTUSERNAME]@[BUILDAGENTIP]
-   ```
-
-   Find the ssh string ub the cloudlab's environment specification
-   ```bash
-   ssh -i adminfabmedical@xxxxxxxxxxxxxxxxxxxxxx
-   ```
-
-3. When asked to confirm if you want to connect, as the authenticity of the connection cannot be validated, type `yes`.
-
-4. When asked for the password, copy and paste the password copy from cloudlab's environment specification
-
-5. SSH connects to the VM and displays a command prompt such as the following. Keep this cloud shell window open for the next step:
+4. SSH connects to the VM and displays a command prompt such as the following. Keep this cloud shell window open for the next step:
 
    `adminfabmedical@fabmedical-SUFFIX:~$`
 
    ![In this screenshot of a Cloud Shell window, ssh -i .ssh/fabmedical adminfabmedical@52.174.141.11 has been typed and run at the command prompt. The information detailed above appears in the window.](media/b4-image27.png "Azure Cloud Shell Connect to Host")
 
+### Task 3: Complete build agent VM checking
 
-### Task 3: Complete the build agent checking
-
-In this task, you update the packages and install the Docker engine.
+In this task, you check the install docker packages 
 
 1. Go to the cloud shell window that has the SSH connection open to the build agent VM.
 
@@ -139,7 +124,7 @@ In this task, you update the packages and install the Docker engine.
 
     ![In this screenshot of a Cloud Shell window, docker version has been typed and run at the command prompt. Docker version information appears in the window, in addition to server version information.](media/docker-version-server.png "Display Docker version")
 
-3. Run a few Docker commands:
+3. Run a few Docker commands, verify the docker package has been installed and able to use
 
     - One to see if there are any containers presently running.
 
@@ -153,20 +138,21 @@ In this task, you update the packages and install the Docker engine.
       docker container ls -a
       ```
 
-4. In both cases, you have an empty list but no errors while running the command. Your build agent is ready with the Docker engine running correctly.
+4. In both cases, you have an empty list but no errors while running the command. 
+Your build agent is ready with the Docker engine running correctly.
 
     ![In this screenshot of a Cloud Shell window, docker container ls has been typed and run at the command prompt, as has the docker container ls -a command.](media/b4-image31.png "Display Docker container list")
 
 ### Task 4: Download Starter Files
 
-In this task, you use `git` to copy the lab content to your cloud shell so that the lab starter files will be available.
+In this task, you use `git` to copy the lab content to your cloud shell so that the lab starter files will be available to use.
 
 > **Note**: If you don't have a cloud shell available, refer back to [Task 1: Setup Azure Cloud Shell](#task-1-setup-azure-cloud-shell).
 
 1. Type the following command and press `<ENTER>`:
 
    ```bash
-   git clone https://github.com/microsoft/MCW-Cloud-native-applications.git
+   cd ~/clouddrive && git clone https://github.com/microsoft/MCW-Cloud-native-applications.git
    ```
 
    > **Note**: If you do not have enough free space, you may need to remove extra files from your cloud shell environment.  Try running `azcopy jobs clean` to remove any `azcopy` jobs and data you do not need.
@@ -181,12 +167,13 @@ In this task, you use `git` to copy the lab content to your cloud shell so that 
    rm -rf MCW-Cloud-native-applications/.git
    ```
 
-4. Starter files will been cloned in the cloudshell and you can find the folder structure as be below
+4. Starter files should cloned in the cloudshell and you can find the folder structure as below
       ![Cloned folder.](media/add-image03.png "clone folder in root")
    
-   Location of the starter files
+   You will need to move to the correct folder to continute
+
    ```bash
-   cd ./MCW-Cloud-native-applications/Hands-on lab/lab-files/developer
+   cd ~/clouddrive/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/
    ```
    
       ![Cloned folder.](media/add-image04.png "relative path")
@@ -195,7 +182,7 @@ In this task, you use `git` to copy the lab content to your cloud shell so that 
 
 In this task, you will take the starter files and run the node.js application as a Docker application.  You will build the Docker images from the existing files and run containers to test and execute the application.
 
-1. From Azure Cloud Shell, connect to your build agent if you are not already connected.
+1. From Azure Cloud Shell, connect to your build agent(Linux VM) if you are not already connected.
 
 2. Type the following command to create a Docker network named `fabmedical`:
 
@@ -230,20 +217,23 @@ In this task, you will take the starter files and run the node.js application as
    show dbs
    quit()
    ```
+   > **Note**: If you are not able to enter the key "( )" in the cloud shell, you can try to copy "**quit()**" from this guide and paste in the cloudshell. Or you can try to use the windows's **on-screen keyboard** to enter the config.
+
 
    ![This screenshot of the console window shows the output from connecting to mongo.](media/b410-Step5.1.png "Connect to mongodb")
 
 6. To initialize the local database with test content, first navigate to the content-init directory and run npm install.
 
    Location of the starter files
-   
+
    ![Cloned folder.](media/add-image04.png "relative path")
    
-      ```bash
-   cd ./MCW-Cloud-native-applications/Hands-on lab/lab-files/developer/content-init
+   ```bash
+   cd ~/clouddrive/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-init
+   ```
+   ```bash
    npm install
    ```
-
    > **Note**: In some cases, the `root` user will be assigned ownership of your user's `.config` folder. If this happens, run the following command to return ownership to `adminfabmedical` and then try `npm install` again:
 
    ```bash
@@ -272,6 +262,7 @@ In this task, you will take the starter files and run the node.js application as
    db.sessions.find()
    quit()
    ```
+     > **Note**: If you are not able to enter the key "( )" in the cloud shell, you can try to copy "**quit()**" from this guide and paste in the cloudshell. Or you can try to use the windows's **on-screen keyboard** to enter the config.
 
    This should produce output similar to the following:
 
@@ -330,7 +321,7 @@ In this task, you will build the Docker images for the application --- one for t
    docker image build -t content-web .
    ```
 
-7. When complete, you will see eight images now exist when you run the Docker images command.
+7. When complete, you will see **content-web** and **content-app** images now exist when you run the Docker images command.
 
    ```bash
    docker image ls
@@ -345,11 +336,12 @@ To run containers in a remote environment, you will typically push images to a D
 
 In this task, you will push images to your ACR account, version images with tagging, and setup continuous integration (CI) to build future versions of your containers and push them to ACR automatically.
 
-1. In the [Azure Portal](https://portal.azure.com/), navigate to the ACR you created in Before the hands-on lab.
+1. In the [Azure Portal](https://portal.azure.com/), navigate to the **container registries** 
+   ![Search ACR.](media/add-image06.PNG "Access keys")
 
 2. Select **Access keys** under **Settings** on the left-hand menu.
 
-   ![In this screenshot of the left-hand menu, Access keys is highlighted below Settings.](media/image64.png "Access keys")
+   ![In this screenshot of the left-hand menu, Access keys is highlighted below Settings.](media/image64.png "ACR")
 
 3. The Access keys blade displays the Login server, username, and password that will be required for the next step. Keep this handy as you perform actions on the build VM.
 
