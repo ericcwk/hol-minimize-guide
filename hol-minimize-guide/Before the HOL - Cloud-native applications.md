@@ -337,7 +337,7 @@ To run containers in a remote environment, you will typically push images to a D
 In this task, you will push images to your ACR account, version images with tagging, and setup continuous integration (CI) to build future versions of your containers and push them to ACR automatically.
 
 1. In the [Azure Portal](https://portal.azure.com/), navigate to the **container registries** 
-   ![Search ACR.](media/add-image06.PNG "Access keys")
+   ![Search ACR.](media/add-image06.png "ACR")
 
 2. Select **Access keys** under **Settings** on the left-hand menu.
 
