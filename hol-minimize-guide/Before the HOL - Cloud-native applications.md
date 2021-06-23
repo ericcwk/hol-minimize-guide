@@ -145,21 +145,23 @@ Your build agent is ready with the Docker engine running correctly.
 
 ### Task 4: Download Starter Files
 
-In this task, you use `git` to copy the lab content to your cloud shell so that the lab starter files will be available to use.
+In this task, you use `git` to copy the lab content to the **"Build Agent VM"** so that the lab starter files will be available to use.
 
 > **Note**: If you don't have a cloud shell available, refer back to [Task 1: Setup Azure Cloud Shell](#task-1-setup-azure-cloud-shell).
+
+> **Note**: If you are not able to connect to the Linux server, refer back to [Task 2: Connect securely to the build agent](#task-2-connect-securely-to-the-build-agent).
+
 
 1. Type the following command and press `<ENTER>`:
 
    ```bash
-   cd ~/clouddrive && git clone https://github.com/microsoft/MCW-Cloud-native-applications.git
+   git clone https://github.com/microsoft/MCW-Cloud-native-applications.git
    ```
-
-   > **Note**: If you do not have enough free space, you may need to remove extra files from your cloud shell environment.  Try running `azcopy jobs clean` to remove any `azcopy` jobs and data you do not need.
+ 
 
 2. The lab files download.
 
-   ![In this screenshot of a Bash window, git clone has been typed and run at the command prompt. The output from git clone is shown.](media/b4-2019-09-30_21-25-06.png "Bash Git Clone")
+   ![In this screenshot of a Bash window, git clone has been typed and run at the command prompt. The output from git clone is shown.](media/add-image07.png "Bash Git Clone")
 
 3. We do not need the `.git` folder, and later steps will be less complex if we remove it. Run this command:
 
@@ -167,13 +169,13 @@ In this task, you use `git` to copy the lab content to your cloud shell so that 
    rm -rf MCW-Cloud-native-applications/.git
    ```
 
-4. Starter files should cloned in the cloudshell and you can find the folder structure as below
+4. Starter files should cloned in the Linux console and you can find the folder structure as below
       ![Cloned folder.](media/add-image03.png "clone folder in root")
    
-   You will need to move to the correct folder to continute
+   Have a look on the location of starter files by copy below command 
 
    ```bash
-   cd ~/clouddrive/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/
+   cd /home/adminfabmedical/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/
    ```
    
       ![Cloned folder.](media/add-image04.png "relative path")
