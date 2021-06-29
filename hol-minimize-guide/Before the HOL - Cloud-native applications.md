@@ -175,7 +175,7 @@ In this task, you use `git` to copy the lab content to the **"Build Agent VM"** 
    Have a look on the location of starter files by copy below command 
 
    ```bash
-   cd /home/adminfabmedical/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/
+   cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/
    ```
    
       ![Cloned folder.](media/add-image04.png "relative path")
@@ -231,7 +231,7 @@ In this task, you will take the starter files and run the node.js application as
    ![Cloned folder.](media/add-image04.png "relative path")
    
    ```bash
-   cd ~/clouddrive/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-init
+   cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-init
    ```
    ```bash
    npm install
@@ -272,7 +272,7 @@ In this task, you will take the starter files and run the node.js application as
 
 ### Task 6: Build the Docker Images
 
-In this task, you will build the Docker images for the application --- one for the API application and another for the web application. Each image will be created via Docker commands that rely on a Dockerfile.
+In this task, you will build 2 Docker images for the application --- one for the API application and another for the web application. Each image will be created via Docker commands that rely on a Dockerfile.
 
 1. From cloud shell connected to the build agent VM, type the following command to view any Docker images on the VM. The list will only contain the mongodb image downloaded earlier.
 
@@ -289,6 +289,8 @@ In this task, you will build the Docker images for the application --- one for t
    - The final dot (`.`) indicates to use the Dockerfile in this current directory context. By default, this file is expected to have the name `Dockerfile` (case sensitive).
 
    ```bash
+   cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-api
+
    docker image build -t content-api .
    ```
 
@@ -305,7 +307,7 @@ In this task, you will build the Docker images for the application --- one for t
 4. Navigate to the content-web folder again and list the files. Note that this folder also has a Dockerfile.
 
    ```bash
-   cd ../content-web
+   cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
    ll
    ```
 
